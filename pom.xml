@@ -16,6 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <java.datasource>1.1.9</java.datasource>
+        <java.fastJson>1.2.70</java.fastJson>
     </properties>
 
     <dependencies>
@@ -63,6 +65,16 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${java.datasource}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${java.fastJson}</version>
         </dependency>
     </dependencies>
 

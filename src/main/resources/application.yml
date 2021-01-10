@@ -1,0 +1,18 @@
+# spring config
+server:
+  port: 80 #server port
+spring:
+  thymeleaf:
+    cache: false # 关闭模板引擎缓存
+  datasource: #数据源的配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: abcd0123
+    url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
+community:
+  github:
+    clientId: 088456cd97b4eb2a2bbf
+    redirectUri: http://localhost/github/authorizedCallback
+    scope: user
+    clientSecret: 50fe47b4e7ab5238523b3e9d35a750f9498c57b5
