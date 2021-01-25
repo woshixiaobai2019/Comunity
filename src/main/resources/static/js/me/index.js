@@ -11,6 +11,8 @@ function isLogin() {
     let login = false;
     $.ajaxSettings.async = false;
     $.get("/toLogin",function (response) {
+        console.log("response:")
+        console.log(response)
         if (response.response !==null && response.response!==""){
             login = true;
             console.log(response.response);

@@ -21,6 +21,7 @@ import java.util.List;
  * @author codeY
  * @version 1.0
  * @date 2021/1/10 22:02
+ * 使用spring boot自带的RestTemplate作为HTTP请求工具
  */
 @Slf4j
 @Component
@@ -30,7 +31,6 @@ public class GitHubUtils {
     @Autowired
     GithubConfig githubConfig;
     public GitAccept authorized(String code){
-        String url = "https://github.com/login/oauth/access_token";
         HttpHeaders headers = new HttpHeaders();
         List<MediaType> accept = new ArrayList<>();
         accept.add(MediaType.APPLICATION_JSON);
@@ -43,7 +43,7 @@ public class GitHubUtils {
         HttpEntity<LinkedMultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
         ResponseEntity<GitAccept> response = null;
         try {
-            response = restTemplate.postForEntity(url, entity, GitAccept.class);
+            response = restTemplate.postForEntity(githubConfig.getAccessTokenUrl(), entity, GitAccept.class);
         } catch (RestClientException e) {
             log.error("认证失败",e);
             throw new GitAuthorizedException("认证失败");
@@ -51,13 +51,12 @@ public class GitHubUtils {
         return response.getBody();
     }
     public UserInfo getUser(String token){
-        String url = "https://api.github.com/user";
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization","token "+token);
         HttpEntity<Object> mapHttpEntity = new HttpEntity<>(null, headers);
-        ResponseEntity<UserInfo> response = null;
+        ResponseEntity<UserInfo> response;
         try {
-            response = restTemplate.exchange(url, HttpMethod.GET, mapHttpEntity, UserInfo.class);
+            response = restTemplate.exchange(githubConfig.getUserInfoUrl(), HttpMethod.GET, mapHttpEntity, UserInfo.class);
         } catch (RestClientException e) {
             log.error("获取用户信息失败",e);
             throw new GitAuthorizedException("获取用户信息失败");

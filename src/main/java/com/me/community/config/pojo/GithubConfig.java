@@ -24,4 +24,6 @@ public class GithubConfig {
     private String scope;
     private String state;
     private String allowSignup;
+    private String accessTokenUrl;
+    private String userInfoUrl;
 }

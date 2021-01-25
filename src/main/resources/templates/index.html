@@ -70,11 +70,14 @@
     let loginUrl = "https://github.com/login/oauth/authorize"
     $(function () {
         //初始化
+        //1.判断是否登录
+        initParam["isLogin"] = isLogin();
+        //2.初始化数据
         initParam["initData"] = init();
         loginUrl +="?client_id="+initParam["initData"].clientId+"&redirect_uri="+initParam["initData"].redirectUri+"&scope="+initParam["initData"].scope;
         $(".login-button").attr("href",loginUrl);
         //判断是否登录
-        initParam["isLogin"] = isLogin();
+
     })
 </script>
 </html>
