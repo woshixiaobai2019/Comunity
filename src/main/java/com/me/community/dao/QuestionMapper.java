@@ -22,20 +22,6 @@ public interface QuestionMapper {
      */
     void save(Question question);
 
-//    /**
-//     * 查询总共的问题数量
-//     * @return
-//     */
-//    int totalCount();
-//
-//    /**
-//     * 查询当前页的数据
-//     * @param offset 偏移
-//     * @param pageSize 每一页的数据条数
-//     * @return 当前页的数据
-//     */
-//    List<QuestionDto> findQuestions(@Param("offset") int offset, @Param("pageSize") int pageSize);
-
     /**
      * 查找用户的所有问题
      * @param uid 用户的id

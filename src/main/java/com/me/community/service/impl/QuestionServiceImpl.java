@@ -49,16 +49,6 @@ public class QuestionServiceImpl implements QuestionService {
         }
     }
 
-//    @Override
-//    public Pagination showQuestions(int currentPage) {
-//        int totalCount = questionMapper.totalCount(null);
-//        int offset = (currentPage-1)*paginationConfig.getPageSize();
-//        List<QuestionDto> questions= questionMapper.findQuestions(null,offset,paginationConfig.getPageSize());
-//        Pagination pagination = paginationUtils.getPagination(currentPage, paginationConfig.getPageSize(), paginationConfig.getMaxPageNum(),totalCount);
-//        pagination.setQuestions(questions);
-//        log.info("获取{}页数据,共{}条",currentPage,totalCount);
-//        return pagination;
-//    }
 
     @Override
     public Pagination showQuestions(Long uid, int currentPage) {
