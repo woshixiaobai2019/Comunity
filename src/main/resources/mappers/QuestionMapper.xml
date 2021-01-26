@@ -11,10 +11,21 @@
         </selectKey>
     </insert>
     <select id="totalCount" resultType="java.lang.Integer">
-        select count(1) from community.question;
+        select count(1) from community.question
+        <where>
+            <if test="creator!=null">
+                creator = #{creator}
+            </if>
+        </where>;
     </select>
     <select id="findQuestions" resultMap="questionDtoMap">
-        select * from community.question limit #{offset},#{pageSize};
+        select * from community.question
+        <where>
+            <if test="creator!=null">
+                creator = #{creator}
+            </if>
+        </where>
+        limit #{offset},#{pageSize};
     </select>
     <resultMap id="questionDtoMap" type="com.me.community.dto.QuestionDto">
         <association property="avatarUrl" column="creator" javaType="string" select="selectAvatarUrl"/>

@@ -12,6 +12,21 @@ function showQuestion(currentPage) {
 
     })
 }
+function showMyQuestion(currentPage) {
+    //获取数据
+    let data = {};
+    data["currentPage"]= currentPage;
+    $.post("/profile/question",data,function (response) {
+        console.log(response)
+        if (response.status==="OK"){
+            parseQuestions(response.response);
+        }else{
+            alert("获取数据错误")
+        }
+
+    })
+}
+
 function parseQuestions(response) {
     let questions = response.questions;
     let questionDivs = ""

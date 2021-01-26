@@ -35,6 +35,6 @@ class CommunityApplicationTests {
     }
     @Test
     void testPagination(){
-        System.out.println(questionService.showQuestions(1));
+        System.out.println(questionService.showQuestions(2L,1));
     }
 }

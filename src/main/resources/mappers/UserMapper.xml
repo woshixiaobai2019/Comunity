@@ -8,7 +8,7 @@
         VALUES(#{gitId},#{avatarUrl},#{username},#{modified},#{createdTime},#{token})
     </insert>
     <update id="updateModified" parameterType="User">
-        update community.user set modified = #{modified} where gitId=#{gitId};
+        update community.user set modified = #{modified},token=#{token} where gitId=#{gitId};
     </update>
     <select id="findUserByGitId" resultType="com.me.community.pojo.User">
         select * from community.user where gitId = #{gitId};

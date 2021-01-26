@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+        <h2>最新回复</h2>
+        <hr>
+        <div class="questions">
+
+        </div>
+        <nav>
+            <ul class="pagination " id="question-pagination">
+
+
+            </ul>
+        </nav>
+
+    </div>
+    <div class="col-lg-3 col-md-12 col-sm-12 profile">
+        <div class="list-group tab">
+           <a  class="list-group-item" style="cursor: pointer" onclick="loadContent('/profile/question','.content')" >
+            我的问题
+           </a>
+            <a  class="list-group-item  active" style="cursor: pointer" onclick="loadContent('/profile/reply','.content')">
+                最新回复
+                <span class="badge">14</span>
+            </a>
+        </div>
+    </div>
+</div>

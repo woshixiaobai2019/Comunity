@@ -35,7 +35,7 @@ public class QuestionController extends BaseController{
             response.setStatus(WebConst.ERROR);
             response.setResponse("请求错误");
         }else{
-            Pagination pagination = questionService.showQuestions(currentPage);
+            Pagination pagination = questionService.showQuestions(null,currentPage);
             response.setResponse(pagination);
             response.setStatus(WebConst.OK);
         }

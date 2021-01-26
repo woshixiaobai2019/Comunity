@@ -16,10 +16,18 @@ public interface QuestionService {
      */
     void save(Question question);
 
+//    /**
+//     * 查询当前页的数据
+//     * @param currentPage 当前的页数
+//     * @return 当前页的数据
+//     */
+//    Pagination showQuestions(int currentPage);
+
     /**
-     * 查询当前页的数据
-     * @param currentPage 当前的页数
-     * @return 当前页的数据
+     * 查找用户提出的问题
+     * @param uid 用户的id
+     * @param currentPage 当前的页
+     * @return 用户当前页的问题
      */
-    Pagination showQuestions(int currentPage);
+    Pagination showQuestions(Long uid, int currentPage);
 }

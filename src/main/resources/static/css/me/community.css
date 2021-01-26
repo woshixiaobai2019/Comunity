@@ -22,3 +22,6 @@ body{
 .question{
     cursor: pointer;
 }
+.profile .tab{
+    margin-top: 15px;
+}
