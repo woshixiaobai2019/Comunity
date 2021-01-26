@@ -1,0 +1,33 @@
+<div class="row" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+        <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>问题发布</h2>
+        <hr>
+        <form class="questionForm">
+            <div class="form-group ">
+                <label for="title">问题标题（简单扼要）：</label>
+                <input type="text" class="form-control notNull" id="title" name="title" bar="标题" placeholder="问题标题....">
+            </div>
+            <div class="form-group">
+                <label for="description">问题补充（必填，参照右侧提示）：</label>
+                <textarea class="form-control notNull" name="description" bar="问题描述" id="description" cols="30" rows="10" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tag">添加标签：</label>
+                <input type="text" class="form-control notNull" id="tag" bar="标签" name="tags" placeholder="输入标签，以‘，’隔开">
+            </div>
+            <a class="btn btn-success btn-publish">发布</a>
+        </form>
+    </div>
+    <div class="col-lg-3 col-md-12 col-sm-12">
+        <h3>问题发起指南</h3>
+        <ul>
+            <li>问题标题：请用简单的语言描述你的问题，不超过25字</li>
+            <li>问题补充：详细补充您的问题内容。并确保问题描述直观清晰，并提供一些相关的资料</li>
+            <li>选择标签：输入一个或多个合适的标签，用逗号隔开，每个标签不超过十个字</li>
+            <li>关于积分：发起一个问题会消耗您20个积分，每多回复一个你将获得5个积分的奖励，为了您的利益<br>
+                在发起问题的时候希望能够更好的回答问题。
+            </li>
+        </ul>
+    </div>
+</div>
+<script th:src="@{/js/me/question.js}"></script>

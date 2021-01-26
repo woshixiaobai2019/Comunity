@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.community.dao.QuestionMapper">
+    <insert id="save" parameterType="Question">
+        insert into community.question(title, description, created, modified, creator)
+        values (#{title},#{description},#{created},#{modified},#{creator})
+        <selectKey keyColumn="id" resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+</mapper>

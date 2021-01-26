@@ -11,7 +11,6 @@ spring:
     password: abcd0123
     url: jdbc:mysql://localhost:3306/community?serverTimezone=UTC
 
-
 community:
   github:
     clientId: 088456cd97b4eb2a2bbf
@@ -26,3 +25,8 @@ community:
 mybatis:
   type-aliases-package: com.me.community.pojo
   mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名转换
+#logging:
+#  level:
+#    root: debug

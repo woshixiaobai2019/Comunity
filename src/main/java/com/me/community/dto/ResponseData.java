@@ -17,5 +17,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class ResponseData implements Serializable {
+    private String status;
     private Object response;
+    private long timeStamp;
 }
