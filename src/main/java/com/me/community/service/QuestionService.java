@@ -1,5 +1,6 @@
 package com.me.community.service;
 
+import com.me.community.dto.Pagination;
 import com.me.community.pojo.Question;
 
 /**
@@ -14,4 +15,11 @@ public interface QuestionService {
      * @param question 问题的实体类
      */
     void save(Question question);
+
+    /**
+     * 查询当前页的数据
+     * @param currentPage 当前的页数
+     * @return 当前页的数据
+     */
+    Pagination showQuestions(int currentPage);
 }

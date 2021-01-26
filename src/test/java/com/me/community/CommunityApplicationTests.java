@@ -33,4 +33,8 @@ class CommunityApplicationTests {
         questionService.save(Question.builder().title("test").description("test").tags(Arrays.asList("test1","test2")).creator(1L).build());
 
     }
+    @Test
+    void testPagination(){
+        System.out.println(questionService.showQuestions(1));
+    }
 }

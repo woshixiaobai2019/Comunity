@@ -1,9 +1,14 @@
 package com.me.community.service.impl;
 
+import com.me.community.config.pojo.PaginationConfig;
 import com.me.community.dao.QuestionMapper;
 import com.me.community.dao.TagMapper;
+import com.me.community.dao.UserMapper;
+import com.me.community.dto.Pagination;
+import com.me.community.dto.QuestionDto;
 import com.me.community.pojo.Question;
 import com.me.community.service.QuestionService;
+import com.me.community.utils.PaginationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -25,6 +31,12 @@ public class QuestionServiceImpl implements QuestionService {
     QuestionMapper questionMapper;
     @Autowired
     TagMapper tagMapper;
+    @Autowired
+    PaginationConfig paginationConfig;
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    PaginationUtils paginationUtils;
     @Override
     public void save(Question question) {
         question.setCreated(DateUtils.format(new Date(), Locale.CHINA));
@@ -35,5 +47,16 @@ public class QuestionServiceImpl implements QuestionService {
         for (String tag : question.getTags()) {
             tagMapper.save(question.getId(),tag);
         }
+    }
+
+    @Override
+    public Pagination showQuestions(int currentPage) {
+        int totalCount = questionMapper.totalCount();
+        int offset = (currentPage-1)*paginationConfig.getPageSize();
+        List<QuestionDto> questions= questionMapper.findQuestions(offset,paginationConfig.getPageSize());
+        Pagination pagination = paginationUtils.getPagination(currentPage, paginationConfig.getPageSize(), paginationConfig.getMaxPageNum(),totalCount);
+        pagination.setQuestions(questions);
+        log.info("获取{}页数据,共{}条",currentPage,totalCount);
+        return pagination;
     }
 }

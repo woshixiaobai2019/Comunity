@@ -10,4 +10,16 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+    <select id="totalCount" resultType="java.lang.Integer">
+        select count(1) from community.question;
+    </select>
+    <select id="findQuestions" resultMap="questionDtoMap">
+        select * from community.question limit #{offset},#{pageSize};
+    </select>
+    <resultMap id="questionDtoMap" type="com.me.community.dto.QuestionDto">
+        <association property="avatarUrl" column="creator" javaType="string" select="selectAvatarUrl"/>
+    </resultMap>
+    <select id="selectAvatarUrl" resultType="string">
+        select avatar_url from user where id = #{creator};
+    </select>
 </mapper>

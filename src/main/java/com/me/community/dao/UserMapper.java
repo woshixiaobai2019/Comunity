@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Select;
  * @date 2021/1/24 14:54
  */
 @Mapper
-public interface UserDao {
+public interface UserMapper {
     /**
      * 根据github id查询用户
      * @param gitId github id

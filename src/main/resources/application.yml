@@ -22,6 +22,9 @@ community:
   web:
     maxAge: 1800 #保存半个小时
     path: /
+  pagination:
+    pageSize: 5
+    maxPageNum: 5
 mybatis:
   type-aliases-package: com.me.community.pojo
   mapper-locations: classpath:mappers/*.xml

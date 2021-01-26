@@ -85,7 +85,8 @@
         loginUrl += "?client_id=" + initParam["initData"].clientId + "&redirect_uri=" + initParam["initData"].redirectUri + "&scope=" + initParam["initData"].scope;
         $(".login-button").attr("href", loginUrl);
         //加载默认的发布页面
-        loadContent("/publish",".content");
+        // loadContent("/publish",".content");
+        loadContent("/questionShow",".content");
     })
 </script>
 </html>
