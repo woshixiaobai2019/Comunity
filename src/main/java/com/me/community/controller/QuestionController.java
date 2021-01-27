@@ -30,7 +30,6 @@ public class QuestionController extends BaseController{
     @ResponseBody
     public ResponseData showQuestions(@RequestParam(name = "currentPage",defaultValue = "1") int currentPage){
         ResponseData response = ResponseData.builder().timeStamp(System.currentTimeMillis()).build();
-        // TODO: 2021/1/26 要先进行登录检查
         if (currentPage<1){
             response.setStatus(WebConst.ERROR);
             response.setResponse("请求错误");

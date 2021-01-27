@@ -47,11 +47,7 @@ public class PublishController extends BaseController{
             build.setStatus(WebConst.ERROR);
         }else{
             List<String> list = Arrays.asList(tags.split(","));
-            Integer creator = (Integer) getAttributeFromSession(request, WebConst.USER_SESSION_PREFIX);
-            // TODO: 2021/1/25 需要做一个登录检查
-            if (creator==null){
-                creator=0;
-            }
+            Long creator = (Long) getAttributeFromSession(request, WebConst.USER_SESSION_PREFIX);
             Question question = Question.builder().title(title).description(description).tags(list).creator(creator).build();
             questionService.save(question);
             build.setStatus(WebConst.OK);
