@@ -26,7 +26,10 @@ class CommunityApplicationTests {
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        System.out.println(dateFormat.format(new Date()));
 //        System.out.println(System.currentTimeMillis());
-        System.out.println(DateUtils.format(System.currentTimeMillis(), Locale.CHINA));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = dateFormat.format(System.currentTimeMillis());
+        System.out.println(dateStr);
+//        System.out.println(DateUtils.format(System.currentTimeMillis(), Locale.CHINA));
     }
     @Test
     void saveQuestion(){
@@ -36,5 +39,13 @@ class CommunityApplicationTests {
     @Test
     void testPagination(){
         System.out.println(questionService.showQuestions(2L,1));
+    }
+    @Test
+    void testQuestionDetail(){
+        System.out.println(questionService.findQuestionDetailById(5, 2L));
+    }
+    @Test
+    void editQuestion(){
+        System.out.println(questionService.findQuestionById(5));
     }
 }

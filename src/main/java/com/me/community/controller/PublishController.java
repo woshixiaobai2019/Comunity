@@ -9,10 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,9 +31,10 @@ public class PublishController extends BaseController{
     public String toPublish(){
         return "publish";
     }
-    @PostMapping("/publish")
+    @PostMapping("/publish/{id}")
     @ResponseBody
     public ResponseData publish(HttpServletRequest request,
+                                @PathVariable(name = "id") Integer id,
                                 @RequestParam(name = "title",defaultValue = "") String title,
                                 @RequestParam(name = "description",defaultValue = "") String description,
                                 @RequestParam(name = "tags",defaultValue = "") String tags){
@@ -49,9 +47,16 @@ public class PublishController extends BaseController{
             List<String> list = Arrays.asList(tags.split(","));
             Long creator = (Long) getAttributeFromSession(request, WebConst.USER_SESSION_PREFIX);
             Question question = Question.builder().title(title).description(description).tags(list).creator(creator).build();
-            questionService.save(question);
+            if (id!=null){
+                question.setId(id);
+                questionService.update(question);
+                build.setResponse("更新问题成功");
+            }else{
+                questionService.save(question);
+                build.setResponse("提交问题成功");
+            }
             build.setStatus(WebConst.OK);
-            build.setResponse("提交问题成功");
+
         }
         return build;
     }

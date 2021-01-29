@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getSession().getAttribute(WebConst.USER_SESSION_PREFIX) == null) {
-            log.info("拦截未登录用户访问:{}",request.getRequestURI());
+            log.debug("拦截未登录用户访问:{}",request.getRequestURI());
             response.getWriter().write("<h1>您还未登录，请先<a href='https://github.com/login/oauth/authorize?client_id=088456cd97b4eb2a2bbf&redirect_uri=http://localhost/authorizedCallback&scope=user'>登录</h1>");
             return false;
         }else{

@@ -6,4 +6,7 @@
     <insert id="save">
         insert into community.tag(q_Id, tag) VALUES (#{qId},#{tag});
     </insert>
+    <select id="findTagById" resultType="java.lang.String">
+        select tag from community.tag where q_Id = #{id};
+    </select>
 </mapper>

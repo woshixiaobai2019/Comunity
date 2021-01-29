@@ -1,6 +1,8 @@
 package com.me.community.service;
 
 import com.me.community.dto.Pagination;
+import com.me.community.dto.QuestionDetailDto;
+import com.me.community.dto.QuestionEditDto;
 import com.me.community.pojo.Question;
 
 /**
@@ -30,4 +32,25 @@ public interface QuestionService {
      * @return 用户当前页的问题
      */
     Pagination showQuestions(Long uid, int currentPage);
+
+    /**
+     * 根据问题的id获取问题详情
+     * @param id 问题的id
+     * @param uid 用户的id
+     * @return 问题的详情数据
+     */
+    QuestionDetailDto findQuestionDetailById(int id, Long uid);
+
+    /**
+     * 根据问题的id查找相应问题
+     * @param id 问题的id
+     * @return 问题的实体
+     */
+    QuestionEditDto findQuestionById(int id);
+
+    /**
+     * 更新问题
+     * @param question 更新问题
+     */
+    void update(Question question);
 }

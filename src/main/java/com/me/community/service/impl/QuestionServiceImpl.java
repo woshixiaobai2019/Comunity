@@ -5,16 +5,18 @@ import com.me.community.dao.QuestionMapper;
 import com.me.community.dao.TagMapper;
 import com.me.community.dao.UserMapper;
 import com.me.community.dto.Pagination;
+import com.me.community.dto.QuestionDetailDto;
 import com.me.community.dto.QuestionDto;
+import com.me.community.dto.QuestionEditDto;
 import com.me.community.pojo.Question;
 import com.me.community.service.QuestionService;
 import com.me.community.utils.PaginationUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.DateUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -60,5 +62,28 @@ public class QuestionServiceImpl implements QuestionService {
         pagination.setQuestions(questions);
         log.info("获取{}页数据,共{}条",currentPage,totalCount);
         return pagination;
+    }
+
+    @Override
+    public QuestionDetailDto findQuestionDetailById(int id, Long uid) {
+        QuestionDetailDto questionDetailDto = questionMapper.findQuestionDetailById(id);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        questionDetailDto.setModified(dateFormat.format(Long.parseLong(questionDetailDto.getModified())));
+        questionDetailDto.setEditable(questionDetailDto.getUid()==uid);
+        return questionDetailDto;
+    }
+
+    @Override
+    public QuestionEditDto findQuestionById(int id) {
+        QuestionEditDto question = questionMapper.findQuestionById(id);
+        List<String> tags = tagMapper.findTagById(id);
+        question.setTags(tags);
+        return question;
+    }
+
+    @Override
+    public void update(Question question) {
+        // TODO: 2021/1/29 需要更新问题的标签
+        questionMapper.update(question);
     }
 }

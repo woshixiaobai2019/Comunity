@@ -1,13 +1,29 @@
 $(".btn-publish").click(function () {
     console.log(" test....")
     if (nullCheck(".notNull")){
-       $.post("/publish", $(".questionForm").serialize(),function (response) {
-            console.log(response);
-            if (response.status==="OK"){
-                alert("发布问题成功");
-            }else{
-                alert(response.response);
-            }
-       })
+       if ($(".btn-publish").attr("update")==="true"){
+           let eid = $(".btn-publish").attr("eid");
+           if (eid!=null && eid!==""){
+               $.post("/publish/"+eid,$(".questionForm").serialize(),function (response) {
+                   console.log(response);
+                   if (response.status==="OK"){
+                       alert("更新问题成功");
+                   }else{
+                       alert(response.response);
+                   }
+               })
+           }else{
+               alert("内部错误")
+           }
+       }else{
+           $.post("/publish", $(".questionForm").serialize(),function (response) {
+               console.log(response);
+               if (response.status==="OK"){
+                   alert("发布问题成功");
+               }else{
+                   alert(response.response);
+               }
+           })
+       }
     }
 })

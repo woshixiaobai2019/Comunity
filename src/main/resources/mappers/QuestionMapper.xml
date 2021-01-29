@@ -10,6 +10,9 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+    <update id="update">
+        update community.question set title = #{title},description = #{description},modified=#{modified} where id = #{id};
+    </update>
     <select id="totalCount" resultType="java.lang.Integer">
         select count(1) from community.question
         <where>
@@ -32,5 +35,19 @@
     </resultMap>
     <select id="selectAvatarUrl" resultType="string">
         select avatar_url from user where id = #{creator};
+    </select>
+    <select id="findQuestionDetailById" resultMap="QuestionDetailMap">
+        select * from community.question where id = #{id};
+    </select>
+    <resultMap id="QuestionDetailMap" type="com.me.community.dto.QuestionDetailDto">
+        <result property="uid" column="creator"/>
+        <association property="avatarUrl" column="creator" javaType="string" select="selectAvatarUrl"/>
+        <association property="username" column="creator" javaType="string" select="selectUsername"/>
+    </resultMap>
+    <select id="selectUsername" resultType="string">
+        select username from community.user where id = #{creator}
+    </select>
+    <select id="findQuestionById" resultType="com.me.community.dto.QuestionEditDto">
+        select * from question where id = #{id};
     </select>
 </mapper>

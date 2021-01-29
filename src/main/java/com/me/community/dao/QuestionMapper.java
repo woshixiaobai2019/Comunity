@@ -1,11 +1,11 @@
 package com.me.community.dao;
 
+import com.me.community.dto.QuestionDetailDto;
 import com.me.community.dto.QuestionDto;
+import com.me.community.dto.QuestionEditDto;
 import com.me.community.pojo.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,4 +37,24 @@ public interface QuestionMapper {
      * @return 当前用户的问题数量
      */
     int totalCount(@Param("creator") Long uid);
+
+    /**
+     * 根据问题的id 查找问题详情
+     * @param id 问题的id
+     * @return 问题的详情
+     */
+    QuestionDetailDto findQuestionDetailById(@Param("id") int id);
+
+    /**
+     * 根据问题的id查找问题
+     * @param id 问题的id
+     * @return 问题的对象
+     */
+    QuestionEditDto findQuestionById(@Param("id") int id);
+
+    /**
+     * 更新问题
+     * @param question 问题对象
+     */
+    void update(Question question);
 }

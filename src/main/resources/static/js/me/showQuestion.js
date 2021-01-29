@@ -94,5 +94,39 @@ function parseQuestions(response) {
     $("#prePage").bind("click",function () {
         showQuestion(response.currentPage-1)
     })
+    $(".question").bind("click",function () {
+        $.ajaxSettings.async = false;
+        let questionId = $(this).attr("id");
+        console.log(questionId);
+        loadContent("/questionDetail",".content");
+        //加载数据
+        getQuestionDetail(questionId)
+        $.ajaxSettings.async = true;
+    })
+}
+
+function getQuestionDetail(id) {
+    $.get("/getQuestionDetail/"+id,function (response) {
+        console.log(response);
+        if (response.status==="OK"){
+            parseDetail(response.response);
+        }else{
+            alert("内部错误");
+        }
+    })
+}
+
+function parseDetail(response) {
+    $(".question-detail-username").html(response.username);
+    $("#question-detail-avatar").attr("src",response.avatarUrl);
+    $("#question-detail-desc").html(response.description);
+    $("#question-detail-publishDate").html(response.modified);
+    $("#question-detail-title").html(response.title);
+    $("#question-detail-viewCount").html(response.viewCount);
+    if (response.editable){
+        $("#editIcon").css("display","inline").attr("eid",response.id);
+    }else{
+        $("#editIcon").css("display","none");
+    }
 }
 
