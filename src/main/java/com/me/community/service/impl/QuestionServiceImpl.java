@@ -8,6 +8,7 @@ import com.me.community.dto.Pagination;
 import com.me.community.dto.QuestionDetailDto;
 import com.me.community.dto.QuestionDto;
 import com.me.community.dto.QuestionEditDto;
+import com.me.community.exception.BusinessException;
 import com.me.community.pojo.Question;
 import com.me.community.service.QuestionService;
 import com.me.community.utils.PaginationUtils;
@@ -67,6 +68,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionDetailDto findQuestionDetailById(int id, Long uid) {
         QuestionDetailDto questionDetailDto = questionMapper.findQuestionDetailById(id);
+        if (questionDetailDto == null){
+            throw new BusinessException("该问题未找到或已被删除");
+        }
+        updateViewCount(id);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         questionDetailDto.setModified(dateFormat.format(Long.parseLong(questionDetailDto.getModified())));
         questionDetailDto.setEditable(questionDetailDto.getUid()==uid);
@@ -76,6 +81,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public QuestionEditDto findQuestionById(int id) {
         QuestionEditDto question = questionMapper.findQuestionById(id);
+        //如果为空就处理异常
+        if (question == null){
+            throw new BusinessException("该问题未找到或已被删除");
+        }
         List<String> tags = tagMapper.findTagById(id);
         question.setTags(tags);
         return question;
@@ -84,6 +93,12 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void update(Question question) {
         // TODO: 2021/1/29 需要更新问题的标签
+        question.setModified(System.currentTimeMillis());
         questionMapper.update(question);
+    }
+
+    @Override
+    public void updateViewCount(int id) {
+        questionMapper.updateViewCount(id);
     }
 }

@@ -45,7 +45,13 @@
         loadContent("/publish",".content");
         $.get("/editQuestion/"+id,function (response) {
             console.log(response)
-            parseEdit(response.response);
+            if (response.status === "OK"){
+                parseEdit(response.response);
+            }else{
+                if (response.code ===500){
+                    errorHandle(response.response);
+                }
+            }
         })
     }
     function parseEdit(response) {

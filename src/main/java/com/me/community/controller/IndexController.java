@@ -6,6 +6,7 @@ import com.me.community.dto.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -31,5 +32,9 @@ public class IndexController {
                 .build();
         data.setResponse(dto);
         return data;
+    }
+    @RequestMapping("/exception")
+    public String exception(){
+        return "exception";
     }
 }

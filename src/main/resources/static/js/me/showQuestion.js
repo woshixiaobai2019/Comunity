@@ -7,7 +7,9 @@ function showQuestion(currentPage) {
         if (response.status==="OK"){
             parseQuestions(response.response);
         }else{
-            alert("获取数据错误")
+            if (response.code ===500){
+                errorHandle(response.response);
+            }
         }
 
     })
@@ -21,7 +23,9 @@ function showMyQuestion(currentPage) {
         if (response.status==="OK"){
             parseQuestions(response.response);
         }else{
-            alert("获取数据错误")
+            if (response.code ===500){
+                errorHandle(response.response);
+            }
         }
 
     })
@@ -111,7 +115,11 @@ function getQuestionDetail(id) {
         if (response.status==="OK"){
             parseDetail(response.response);
         }else{
-            alert("内部错误");
+            if (response.code ===500){
+                errorHandle(response.response);
+            }else{
+                alert(response.response);
+            }
         }
     })
 }

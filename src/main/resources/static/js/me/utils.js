@@ -20,3 +20,7 @@ function nullCheck(element){
 
     return true;
 }
+function errorHandle(response) {
+    loadContent("/exception",".content");
+    $("#error-msg").html(response);
+}

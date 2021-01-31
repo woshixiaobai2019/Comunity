@@ -53,4 +53,10 @@ public interface QuestionService {
      * @param question 更新问题
      */
     void update(Question question);
+
+    /**
+     * 更新阅读数
+     * @param id 问题的id
+     */
+    void updateViewCount(int id);
 }

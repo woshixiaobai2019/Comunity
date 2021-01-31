@@ -6,10 +6,10 @@ package com.me.community.exception;
  * @date 2021/1/10 22:08
  */
 public class BusinessException extends RuntimeException{
-    BusinessException(){
+    public BusinessException(){
 
     }
-    BusinessException(String msg){
+    public BusinessException(String msg){
         super(msg);
     }
 }

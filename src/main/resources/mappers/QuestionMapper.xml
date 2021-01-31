@@ -13,6 +13,9 @@
     <update id="update">
         update community.question set title = #{title},description = #{description},modified=#{modified} where id = #{id};
     </update>
+    <update id="updateViewCount">
+        update community.question set view_count = view_count +1 where id = #{id};
+    </update>
     <select id="totalCount" resultType="java.lang.Integer">
         select count(1) from community.question
         <where>

@@ -9,7 +9,11 @@ $(".btn-publish").click(function () {
                    if (response.status==="OK"){
                        alert("更新问题成功");
                    }else{
-                       alert(response.response);
+                       if (response.code ===500){
+                           errorHandle(response.response);
+                       }else{
+                           alert(response.response);
+                       }
                    }
                })
            }else{
@@ -21,7 +25,11 @@ $(".btn-publish").click(function () {
                if (response.status==="OK"){
                    alert("发布问题成功");
                }else{
-                   alert(response.response);
+                   if (response.code ===500){
+                       errorHandle(response.response);
+                   }else{
+                       alert(response.response);
+                   }
                }
            })
        }

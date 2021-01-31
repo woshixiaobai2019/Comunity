@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.me.community.dao.CommentMapper">
+    <insert id="save">
+        insert into community.comment(parent_id, type, commentator, created, modified, content)
+        VALUES (#{parentId},#{type},#{commentator},#{created},#{modified},#{content});
+    </insert>
+</mapper>
