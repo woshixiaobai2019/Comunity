@@ -18,7 +18,7 @@ public class QuestionDto {
     /**
      * 问题的id
      */
-    private Integer id;
+    private long id;
     /**
      * 问题的标题
      */

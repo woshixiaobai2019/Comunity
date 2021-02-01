@@ -7,4 +7,7 @@
         insert into community.comment(parent_id, type, commentator, created, modified, content)
         VALUES (#{parentId},#{type},#{commentator},#{created},#{modified},#{content});
     </insert>
+    <select id="findCommentById" resultType="com.me.community.pojo.Comment">
+        select * from community.comment where id = #{parentId};
+    </select>
 </mapper>

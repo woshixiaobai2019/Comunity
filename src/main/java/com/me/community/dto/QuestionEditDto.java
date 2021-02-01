@@ -20,7 +20,7 @@ public class QuestionEditDto {
     /**
      * 问题的id
      */
-    private Integer id;
+    private long id;
     /**
      * 问题的标题
      */

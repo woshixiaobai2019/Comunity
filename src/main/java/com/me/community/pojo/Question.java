@@ -21,7 +21,7 @@ public class Question implements Serializable {
     /**
      * 问题的id
      */
-    private int id;
+    private long id;
     /**
      * 问题的标题
      */

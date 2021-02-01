@@ -43,14 +43,14 @@ public interface QuestionMapper {
      * @param id 问题的id
      * @return 问题的详情
      */
-    QuestionDetailDto findQuestionDetailById(@Param("id") int id);
+    QuestionDetailDto findQuestionDetailById(@Param("id") long id);
 
     /**
      * 根据问题的id查找问题
      * @param id 问题的id
      * @return 问题的对象
      */
-    QuestionEditDto findQuestionById(@Param("id") int id);
+    QuestionEditDto findQuestionById(@Param("id") long id);
 
     /**
      * 更新问题
@@ -62,5 +62,11 @@ public interface QuestionMapper {
      * 更新阅读数
      * @param id 问题的id
      */
-    void updateViewCount(@Param("id") int id);
+    void updateViewCount(@Param("id") long id);
+
+    /**
+     * 更新评论数
+     * @param parentId 问题的id
+     */
+    void updateComment(@Param("parentId") long parentId);
 }

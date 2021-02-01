@@ -16,6 +16,9 @@
     <update id="updateViewCount">
         update community.question set view_count = view_count +1 where id = #{id};
     </update>
+    <update id="updateComment">
+        update community.question set comment_count = comment_count+1 where id = #{parentId};
+    </update>
     <select id="totalCount" resultType="java.lang.Integer">
         select count(1) from community.question
         <where>
