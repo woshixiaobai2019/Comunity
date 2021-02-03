@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class PaginationUtils {
     public Pagination getPagination(int currentPage,int pageSize,int maxPageNum,int totalCount){
         Pagination pagination = Pagination.builder().currentPage(currentPage).pageSize(pageSize).maxPageNum(maxPageNum).build();
-        int totalPage = totalCount%pageSize ==0?totalCount/pageSize:(totalCount/pageSize)+1;
+        int totalPage = totalCount%pageSize ==0?totalCount/pageSize:((totalCount/pageSize)+1);
         pagination.setTotalPage(totalPage);
         //如果当前页不为首页就有上一页的按钮
         pagination.setShowPrePageButton(currentPage != 1);

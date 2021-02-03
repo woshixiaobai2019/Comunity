@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
     public ResponseData handle(Exception exception){
         ResponseData build = ResponseData.builder().timeStamp(System.currentTimeMillis()).status(WebConst.ERROR).code(500).build();
         if (exception instanceof  BusinessException){
+            // TODO: 2021/2/1 这里的处理需要细致一点， 有些内部的错误还是需要返回json -m
             log.error(exception.getMessage());
             build.setResponse(exception.getMessage());
         }else{

@@ -17,7 +17,7 @@ public interface TagMapper {
      * @param qId 问题的id
      * @param tag 标签的名称
      */
-    void save(int qId,String tag);
+    void save(long qId,String tag);
 
     /**
      * 根据问题id查找相应的标签

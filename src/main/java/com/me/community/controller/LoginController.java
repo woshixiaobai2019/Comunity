@@ -57,4 +57,10 @@ public class LoginController extends BaseController{
         UserInfo build = UserInfo.builder().avatar_url(user.getAvatarUrl()).login(user.getUsername()).build();
         return ResponseData.builder().response(build).build();
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response){
+        setAttribute2Session(request,WebConst.USER_SESSION_PREFIX,null);
+        setAttribute2Cookie(response,WebConst.USER_COOKIE_PREFIX,null);
+        return "redirect:/index";
+    }
 }

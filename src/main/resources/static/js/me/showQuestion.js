@@ -32,7 +32,7 @@ function showMyQuestion(currentPage) {
 }
 
 function parseQuestions(response) {
-    let questions = response.questions;
+    let questions = response.objects;
     let questionDivs = ""
     for (let i=0;i<questions.length;i++){
         let questionDiv = "<div class=\"question\" id='"+questions[i].id+"'>\n" +
@@ -126,11 +126,12 @@ function getQuestionDetail(id) {
 
 function parseDetail(response) {
     $(".question-detail-username").html(response.username);
-    $("#question-detail-avatar").attr("src",response.avatarUrl);
+    $(".question-detail-avatar").attr("src",response.avatarUrl);
     $("#question-detail-desc").html(response.description);
     $("#question-detail-publishDate").html(response.modified);
     $("#question-detail-title").html(response.title);
     $("#question-detail-viewCount").html(response.viewCount);
+    $("#question-detail-comment-count").html(response.commentCount)
     if (response.editable){
         $("#editIcon").css("display","inline").attr("eid",response.id);
     }else{

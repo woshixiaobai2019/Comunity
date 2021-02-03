@@ -15,6 +15,7 @@ import com.me.community.utils.PaginationUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +42,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     PaginationUtils paginationUtils;
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Question question) {
         question.setCreated(DateUtils.format(new Date(), Locale.CHINA));
         question.setModified(System.currentTimeMillis());
@@ -60,8 +62,8 @@ public class QuestionServiceImpl implements QuestionService {
         int offset = (currentPage-1)*paginationConfig.getPageSize();
         List<QuestionDto> questions= questionMapper.findQuestions(uid,offset,paginationConfig.getPageSize());
         Pagination pagination = paginationUtils.getPagination(currentPage, paginationConfig.getPageSize(), paginationConfig.getMaxPageNum(),totalCount);
-        pagination.setQuestions(questions);
-        log.info("获取{}页数据,共{}条",currentPage,totalCount);
+        pagination.setObjects(questions);
+        log.debug("获取{}页数据,共{}条",currentPage,totalCount);
         return pagination;
     }
 
@@ -91,6 +93,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(Question question) {
         // TODO: 2021/1/29 需要更新问题的标签
         question.setModified(System.currentTimeMillis());
@@ -98,6 +101,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateViewCount(int id) {
         questionMapper.updateViewCount(id);
     }

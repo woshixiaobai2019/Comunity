@@ -1,6 +1,7 @@
 package com.me.community.controller;
 
 import com.me.community.consts.WebConst;
+import com.me.community.dto.Pagination;
 import com.me.community.dto.ResponseData;
 import com.me.community.pojo.Comment;
 import com.me.community.service.CommentService;
@@ -34,6 +35,7 @@ public class CommentController extends BaseController{
             build.setStatus(WebConst.ERROR);
             build.setResponse("非法评论");
         }else{
+            build.setStatus(WebConst.OK);
             Comment comment = Comment.builder().commentator((Long) getAttributeFromSession(request, WebConst.USER_SESSION_PREFIX))
                     .content(content)
                     .parentId(parentId)
@@ -41,6 +43,20 @@ public class CommentController extends BaseController{
                     .build();
             commentService.save(comment);
         }
-
+        return build;
+    }
+    @PostMapping("/firstLevelComment")
+    @ResponseBody
+    public ResponseData getFirstLevelComment(@RequestParam(name = "qId",defaultValue = "0") long qId,@RequestParam(name = "currentPage",defaultValue = "1") int currentPage){
+        ResponseData build = ResponseData.builder().timeStamp(System.currentTimeMillis()).build();
+        if (currentPage<1 || qId==0){
+            build.setStatus(WebConst.ERROR);
+            build.setResponse("参数错误");
+        }else{
+            Pagination pagination = commentService.getFirstLevelComment(qId,currentPage);
+            build.setResponse(pagination);
+            build.setStatus(WebConst.OK);
+        }
+        return build;
     }
 }

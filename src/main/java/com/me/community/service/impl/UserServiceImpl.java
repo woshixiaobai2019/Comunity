@@ -6,6 +6,7 @@ import com.me.community.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.DateUtils;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void create(User user) {
         //1.判断数据库中是否已经存在该用户,存在就不新创建了
         User query = userMapper.findUserByGitId(user.getGitId());

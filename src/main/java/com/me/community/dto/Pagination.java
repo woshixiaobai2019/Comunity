@@ -56,6 +56,6 @@ public class Pagination {
     /**
      * 问题的数据
      */
-    private List<QuestionDto> questions;
+    private List<?> objects;
 
 }

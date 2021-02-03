@@ -7,7 +7,23 @@
         insert into community.comment(parent_id, type, commentator, created, modified, content)
         VALUES (#{parentId},#{type},#{commentator},#{created},#{modified},#{content});
     </insert>
+    <select id="totalCount" resultType="java.lang.Integer">
+        select count(1) from community.comment where parent_id = #{qId} and type = #{type};
+    </select>
     <select id="findCommentById" resultType="com.me.community.pojo.Comment">
         select * from community.comment where id = #{parentId};
+    </select>
+    <select id="findComments" resultMap="commentDtoMap">
+        select * from community.comment where parent_id = #{qId} and type = #{type} limit #{offset},#{pageSize};
+    </select>
+    <resultMap id="commentDtoMap" type="com.me.community.dto.CommentDto">
+        <association property="username" column="commentator" select="selectUsername"/>
+        <association property="avatarUrl" column="commentator" select="selectAvatar"/>
+    </resultMap>
+    <select id="selectUsername" resultType="string">
+        select username from community.user where id = #{commentator};
+    </select>
+    <select id="selectAvatar" resultType="string">
+        select avatar_url from community.user where id = #{commentator};
     </select>
 </mapper>

@@ -1,6 +1,7 @@
 package com.me.community;
 
 import com.me.community.pojo.Question;
+import com.me.community.service.CommentService;
 import com.me.community.service.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Locale;
 class CommunityApplicationTests {
     @Autowired
     QuestionService questionService;
+    @Autowired
+    CommentService commentService;
     @Test
     void contextLoads() {
     }
@@ -47,5 +50,9 @@ class CommunityApplicationTests {
     @Test
     void editQuestion(){
         System.out.println(questionService.findQuestionById(5));
+    }
+    @Test
+    void commentTest(){
+        System.out.println(commentService.getFirstLevelComment(4, 1));
     }
 }
