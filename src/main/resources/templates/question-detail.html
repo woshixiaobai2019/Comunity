@@ -37,10 +37,18 @@
                         <div>这是一条评论</div>
                         <div class="menu">
                             <span class="glyphicon glyphicon-thumbs-up comment-icon"></span>
-                            <span class="glyphicon glyphicon-comment  comment-icon"></span>
+                            <span class="glyphicon glyphicon-comment  comment-icon" onclick="showSecondLevelComment()"><span class="commentCount">1</span></span>
+
                             <span class="pull-right">
                             2020-11-1
                         </span>
+                            <div class="second-comment-list collapse" id="comment-1" expanded="false">
+                                <div class="second-comments-list">
+
+                                </div>
+                                <label for="se-comment-content"></label><textarea class="form-control " name="content" id="se-comment-content" cols="30" rows="3" style="margin: 10px 0" placeholder="评论一下....."></textarea>
+                                <a class="btn-success btn btn-reply " onclick="seComment()">回复</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +106,6 @@
     </div>
 </div>
 <script th:src="@{/js/me/comment.js}"></script>
-
 <script>
     $(function () {
         showFirstLevelComments(1);

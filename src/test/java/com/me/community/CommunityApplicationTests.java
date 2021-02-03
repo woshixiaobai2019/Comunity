@@ -55,4 +55,8 @@ class CommunityApplicationTests {
     void commentTest(){
         System.out.println(commentService.getFirstLevelComment(4, 1));
     }
+    @Test
+    void seCommentTest(){
+        System.out.println(commentService.getSecondLevelComment(1));
+    }
 }

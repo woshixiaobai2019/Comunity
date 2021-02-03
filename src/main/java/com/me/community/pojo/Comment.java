@@ -53,4 +53,8 @@ public class Comment implements Serializable {
      * 评论的内容
      */
     private String content;
+    /**
+     * 评论的评论数
+     */
+    private int commentCount;
 }

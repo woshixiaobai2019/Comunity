@@ -1,6 +1,7 @@
 package com.me.community.controller;
 
 import com.me.community.consts.WebConst;
+import com.me.community.dto.CommentDto;
 import com.me.community.dto.Pagination;
 import com.me.community.dto.ResponseData;
 import com.me.community.pojo.Comment;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author codeY
@@ -56,6 +60,21 @@ public class CommentController extends BaseController{
             Pagination pagination = commentService.getFirstLevelComment(qId,currentPage);
             build.setResponse(pagination);
             build.setStatus(WebConst.OK);
+        }
+        return build;
+    }
+    @PostMapping("/secondLevelComment")
+    @ResponseBody
+    public ResponseData getSecondLevelComment(@RequestParam(name = "parentId",defaultValue = "0") long parentId){
+        ResponseData build = ResponseData.builder().timeStamp(System.currentTimeMillis()).build();
+        if (parentId==0){
+            build.setStatus(WebConst.ERROR);
+            build.setResponse("参数错误");
+        }else{
+            build.setStatus(WebConst.OK);
+
+            List<CommentDto> commentDtoList =  commentService.getSecondLevelComment(parentId);
+            build.setResponse(commentDtoList);
         }
         return build;
     }

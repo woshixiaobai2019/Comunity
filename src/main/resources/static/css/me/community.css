@@ -13,6 +13,10 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+.btn-reply{
+    float: right;
+    margin-bottom: 15px;
+}
 .question-title{
 
 }
@@ -57,6 +61,14 @@ body{
 }
 .comment-icon:hover{
     color: #499ef3;
+}
+.second-comment-list{
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #398439;
+}
+.commentCount{
+    vertical-align: text-top;
 }
 
 

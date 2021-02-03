@@ -60,6 +60,7 @@ public class CommentServiceImpl implements CommentService {
             if (commentById==null){
                 throw new BusinessException("您回复的评论不存在");
             }
+            commentMapper.updateCommentCount(comment.getParentId());
             commentMapper.save(comment);
         }else{
             throw new BusinessException("未知的评论类型");
@@ -77,5 +78,12 @@ public class CommentServiceImpl implements CommentService {
         pagination.setObjects(collect);
         log.debug("获取问题{}的{}页数据,共{}条",qId,currentPage,totalCount);
         return pagination;
+    }
+
+    @Override
+    public List<CommentDto> getSecondLevelComment(long parentId) {
+        List<CommentDto>commentDtoList = commentMapper.findSecondComments(parentId);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return commentDtoList.stream().peek(commentDto -> commentDto.setModified(dateFormat.format(Long.parseLong(commentDto.getModified())))).collect(Collectors.toList());
     }
 }

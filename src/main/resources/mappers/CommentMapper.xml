@@ -7,6 +7,9 @@
         insert into community.comment(parent_id, type, commentator, created, modified, content)
         VALUES (#{parentId},#{type},#{commentator},#{created},#{modified},#{content});
     </insert>
+    <update id="updateCommentCount">
+        update community.comment set commentCount = commentCount+1 where id =#{parentId};
+    </update>
     <select id="totalCount" resultType="java.lang.Integer">
         select count(1) from community.comment where parent_id = #{qId} and type = #{type};
     </select>
@@ -14,7 +17,7 @@
         select * from community.comment where id = #{parentId};
     </select>
     <select id="findComments" resultMap="commentDtoMap">
-        select * from community.comment where parent_id = #{qId} and type = #{type} limit #{offset},#{pageSize};
+        select * from community.comment where parent_id = #{qId} and type = #{type} order by commentCount desc,like_count desc,modified desc limit #{offset},#{pageSize};
     </select>
     <resultMap id="commentDtoMap" type="com.me.community.dto.CommentDto">
         <association property="username" column="commentator" select="selectUsername"/>
@@ -25,5 +28,8 @@
     </select>
     <select id="selectAvatar" resultType="string">
         select avatar_url from community.user where id = #{commentator};
+    </select>
+    <select id="findSecondComments" resultMap="commentDtoMap">
+        select * from community.comment where parent_id = #{parentId};
     </select>
 </mapper>

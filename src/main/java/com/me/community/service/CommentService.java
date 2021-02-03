@@ -1,7 +1,10 @@
 package com.me.community.service;
 
+import com.me.community.dto.CommentDto;
 import com.me.community.dto.Pagination;
 import com.me.community.pojo.Comment;
+
+import java.util.List;
 
 /**
  * @author codeY
@@ -24,4 +27,11 @@ public interface CommentService {
      * @return 当前页的评论
      */
     Pagination getFirstLevelComment(long qId, int currentPage);
+
+    /**
+     * 获取一个评论的二级评论
+     * @param parentId 父级评论的id
+     * @return 一条评论的所有子评论
+     */
+    List<CommentDto> getSecondLevelComment(long parentId);
 }

@@ -25,7 +25,7 @@ public interface CommentMapper {
      * @param parentId 该评论的父级评论id
      * @return 对应的评论
      */
-    Comment findCommentById(@Param("parendId") long parentId);
+    Comment findCommentById(@Param("parentId") long parentId);
 
     /**
      * 查询问题的评论数
@@ -45,4 +45,17 @@ public interface CommentMapper {
      * @return 当前页的评论内容
      */
     List<CommentDto> findComments(@Param("qId") long qId, @Param("offset") int offset, @Param("pageSize") int pageSize, @Param("type") long type);
+
+    /**
+     * 更新评论数
+     * @param parentId 评论的父级ID
+     */
+    void updateCommentCount(@Param("parentId") long parentId);
+
+    /**
+     * 查询一条评论的所有子评论
+     * @param parentId 查询的评论的id
+     * @return 所有子评论
+     */
+    List<CommentDto> findSecondComments(@Param("parentId") long parentId);
 }
